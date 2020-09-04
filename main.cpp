@@ -28,30 +28,10 @@ string out_opt = "-o";
 string merge_opt = "merge"; 
 string quick_opt = "quick"; 
 
-//print function
-void printArray(int array[], int size){
-    //cout<<"Inside print array"<<endl; 
-    for(int i = 0; i < size; i++){
-        printf("\t%d\n", array[i]); 
-    }
-}
 
-void printVector(vector <int> array){
-    //cout<<"Inside print array"<<endl; 
-    for(int i = 0; i < array.size(); i++){
-        printf("\t%d\n", array[i]); 
-    }
-}
-
-
-void testQuickSort(){
-    vector <int> array{10, 80, 30, 90, 40, 50, 70}; 
-    quickSort(array); 
-    cout <<"Array after sorting:"<<endl ; 
-    printVector(array); 
-
-}
-
+/*
+    Prints the expected commandline call. 
+*/
 void printUsage(){
     printf("mysort [--name] [sourcefile.txt] [-o outfile.txt] [--alg=<merge,quick>]\n");
 }
@@ -59,6 +39,7 @@ void printUsage(){
 
 //main function
 int main(int argc, char* argv[]){ 
+
     //variable for parsing the command line
     string srcFile; //stores the name of the file to read from 
     string outFile; //stores the name of the file to output the data
@@ -136,10 +117,8 @@ int main(int argc, char* argv[]){
     }
     fileIn.close(); 
    
-
-     //TODO Run sorting algorithm HERE
-       cout<<"Running the "<<alg<<"Sort algorithm with input file: "
-        <<srcFile<<" and outputting to: "<<outFile<<endl; 
+    cout<<"Running the "<<alg<<"Sort algorithm with input file: "
+    <<srcFile<<" and outputting to: "<<outFile<<endl; 
     if(alg.compare("quick")==0){
         quickSort(data); 
     }else{

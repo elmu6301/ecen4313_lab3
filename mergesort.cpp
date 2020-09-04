@@ -18,13 +18,12 @@ using namespace std;
 
 
 /*
-
+    Merges the two array into one in element order.
 */
 void merge(vector <int> &array, vector <int> &lArray, vector <int> &rArray){
     array.clear(); 
     int lSize = lArray.size(); 
     int rSize = rArray.size(); 
-    // int size = lSize + rSize; 
 
     int left = 0;  //index of left array
     int right = 0; //index of right array
@@ -32,11 +31,9 @@ void merge(vector <int> &array, vector <int> &lArray, vector <int> &rArray){
     while(left < lSize && right < rSize){
         if(lArray[left] < rArray[right]){
             array.push_back(lArray[left]); 
-            //array[index] = lArray[left]; 
             left++; 
         }else{
             array.push_back(rArray[right]);
-            // printf("array[%d] = rArray[%d] = %d\n", index, right, rArray[right]); 
             right++; 
        }
  
@@ -55,8 +52,9 @@ void merge(vector <int> &array, vector <int> &lArray, vector <int> &rArray){
 
 }
 
-
-
+/*
+    Applies the merge sort algorithm on a given array.
+*/
 void mergeSort(vector <int> &array){
     int size = array.size(); 
     if(size == 1){

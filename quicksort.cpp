@@ -20,12 +20,13 @@ void quickPrint(){
     cout<<"Inside quicksort.cpp"<<endl; 
 }
 
-
-
+/*
+    Partitions an array into a part less than a pivot (ending index)
+    and another larger than the pivot. 
+*/
 int partition(vector <int> &array, int sIndex, int eIndex){
     //Select the last element to be the pivot
     int pivot = array[eIndex]; 
-    // printf("\n  pivot = %d\n", pivot); 
     //Create indecies to for partitioning
     int i = sIndex - 1; 
     int temp; 
@@ -34,7 +35,6 @@ int partition(vector <int> &array, int sIndex, int eIndex){
         if(array[j] < pivot){
             
             i++; 
-            // printf("swaping %d and %d when i = %d and j = %d\n", array[i], array[j], i , j); 
             //swap the elements at i & j
             swap(array[i],array[j]); 
         }
@@ -45,23 +45,25 @@ int partition(vector <int> &array, int sIndex, int eIndex){
     return i+1; 
 }
 
+
+/*
+    Recursive quick sort algorithm implementation. 
+*/
 void quickSortR(vector <int> &array, int sIndex, int eIndex){
     //check to make sure we are in bounds
     if(sIndex < eIndex){
         //Partition the array and get the partition index
         int pIndex = partition(array, sIndex, eIndex); 
         //Quick sort the partion before the partition index 
-        // cout<<"sIndex = "<<sIndex<<" eIndex = "<<eIndex<<": ";  
-        // for(int i = sIndex; i < eIndex; i++){
-        //     printf("%d ",array[i]); 
-        // }
-        // cout<<endl; 
         quickSortR(array,sIndex, pIndex - 1); 
         //Quick sort the partition after the partition index
         quickSortR(array, pIndex + 1 , eIndex);
     }
 }
 
+/*
+    Applies the quick sort algorithm to sort a given array
+*/
 void quickSort(vector <int> &array ){
     quickSortR(array, 0, array.size()-1); 
 }
