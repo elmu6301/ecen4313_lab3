@@ -19,23 +19,29 @@ using namespace std;
 
 //Developer includes
 #include "mergesort.hpp"
-#include "quicksort.hpp"
+#include "omp_mergesort.hpp"
 
 //Global Variables
 string my_name = "Elena Murray"; //full name 
-string name_opt = "--name"; 
-string out_opt = "-o"; 
-string merge_opt = "merge"; 
-string quick_opt = "quick"; 
-
 
 /*
     Prints the expected commandline call. 
 */
 void printUsage(){
-    printf("mysort [--name] [sourcefile.txt] [-o outfile.txt] [--alg=<merge,quick>]\n");
+    printf("mysort [--name] [sourcefile.txt] [-o outfile.txt]\n");
 }
 
+
+// int main(){
+//     vector <int> arrayIn {1,4,3,8,5,7,27,6}; 
+//     printf("\nBefore sorting "); 
+//     mergePrint(arrayIn); 
+    
+//     omp_mergesort(arrayIn); 
+    
+//     printf("\nAfter sorting "); 
+//     mergePrint(arrayIn); 
+// }
 
 //main function
 int main(int argc, char* argv[]){ 
@@ -43,16 +49,15 @@ int main(int argc, char* argv[]){
     //variable for parsing the command line
     string srcFile; //stores the name of the file to read from 
     string outFile; //stores the name of the file to output the data
-    string alg; //stores the algorithm to be used either q (quicksort) or m (mergesort) 
+    // string alg; //stores the algorithm to be used either q (quicksort) or m (mergesort) 
     char opt; //stores the option value
     
     static struct option longopt[] = {
         {"name", no_argument, NULL, 'n'},// --name
         {"o", required_argument, NULL, 'o'}, // output file
-        {"alg", required_argument, NULL, 'a'} // algorithm
 
     }; 
-    char * optstr = "no:a:"; 
+    char * optstr = "no:"; 
     //Get the source file
     if(argc > 1){
         srcFile = argv[1];  
@@ -68,9 +73,6 @@ int main(int argc, char* argv[]){
             case 'o':
                 outFile = optarg; 
                 break; 
-            case 'a':
-                alg = optarg; 
-                break; 
         }
     }
     //Check options to make sure that they are valid
@@ -85,12 +87,6 @@ int main(int argc, char* argv[]){
         printUsage(); 
         return -2;
     }   
-
-    if(alg.compare("merge")!= 0 && alg.compare("quick")!=0 ){
-        cout<<"An invalid algorithm was entered."<<endl; 
-        printUsage();
-        return -3; 
-    }
     
     
     //Open sourcefile
@@ -117,13 +113,11 @@ int main(int argc, char* argv[]){
     }
     fileIn.close(); 
    
-    cout<<"Running the "<<alg<<"Sort algorithm with input file: "
+    cout<<"Running the mergeSort algorithm with input file: "
     <<srcFile<<" and outputting to: "<<outFile<<endl; 
-    if(alg.compare("quick")==0){
-        quickSort(data); 
-    }else{
-        mergeSort(data);  
-    }
+    
+    omp_mergesort(data);  
+
     //Output sorted data to output file
     ofstream fileOut; 
     fileOut.open(outFile); 

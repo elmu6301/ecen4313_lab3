@@ -5,8 +5,8 @@
 # 	Makefile
 
 #Executable
-mysort: main.o mergesort.o quicksort.o
-	g++ main.o mergesort.o quicksort.o -o mysort
+mysort: main.o mergesort.o  omp_mergesort.o
+	g++ main.o mergesort.o omp_mergesort.o -fopenmp -o mysort
 
 #Object Files
 main.o: main.cpp
@@ -15,7 +15,8 @@ mergesort.o: mergesort.cpp mergesort.hpp
 	g++ -c mergesort.cpp 
 quicksort.o: quicksort.cpp quicksort.hpp
 	g++ -c quicksort.cpp 
-
+omp_mergesort.o: omp_mergesort.cpp omp_mergesort.hpp
+	g++ -c omp_mergesort.cpp -fopenmp
 #Clean
 clean:
 	rm *.o mysort

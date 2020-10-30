@@ -9,7 +9,7 @@ Lab 0:
 */
 #include <vector>
 
-void mergePrint(); 
+void mergePrint(vector <int> &array); 
 void merge(vector <int> &array, vector <int> &lArray, vector <int> &rArray); 
 void mergeSort(vector <int> &array); 
 
