@@ -13,7 +13,7 @@ test_out="test_files/output.txt"
 
 test_res=('SUCCESS' 'SUCCESS' 'SUCCESS' 'SUCCESS' 'SUCCESS' 'SUCCESS' 'SUCCESS' 'SUCCESS' 'SUCCESS' 'SUCCESS' 'SUCCESS' 'SUCCESS' 'SUCCESS' 'SUCCESS' 'SUCCESS' 'SUCCESS')
 test_case=1
-n=16
+n=17
 i=0
 while [ $i -lt $n ]
 do

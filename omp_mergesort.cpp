@@ -61,19 +61,19 @@ std::vector<std::vector<int>> split_vector_array(std::vector<int>array,int num_p
 }
 
 /*
-    Merges the two array into one in element order.
+    Runs a parallized mergesort on data using OpenMP where each thread gets a subarray 
+	of data. Uses the default number of threads available unless that excedes the number 
+	of elements in data. In that case the number of threads becomes the umber of elements in data
 */
 void omp_mergesort(vector <int> &data){
     std::vector<std::vector<int>> split_arrays; 
-    int nthreads = omp_get_thread_limit(); 
+    int nthreads = omp_get_max_threads(); //omp_get_thread_limit(); 
     
     //Place a limit on threads if there are more threads than pieces of data
     if(nthreads > data.size()){
         omp_set_num_threads(data.size());   
     }
 
-
-    // printf("\nRunning omp_mergesort:"); 
     #pragma omp parallel default(none) shared(split_arrays, data, nthreads)
     {
         int tid = omp_get_thread_num(); 
@@ -86,17 +86,11 @@ void omp_mergesort(vector <int> &data){
             // printf("\nThread[%d] splitting data into %d parts", tid, nthreads); 
             split_arrays = split_vector_array(data, nthreads); 
         }
-        // printf("\nLocal chunk[%d] (pre-sort): ", tid); 
-        // mergePrint(split_arrays[tid]); 
 
         //run mergesort on chuck assigned by tid
         mergeSort(split_arrays[tid]); 
 
-        // printf("\nLocal chunk[%d] (post-sort): ", tid); 
-        // mergePrint(split_arrays[tid]); 
-
     }
-    // printf("\n");
 
     //Merge arrays
     std::vector<int> array; //stores the final array

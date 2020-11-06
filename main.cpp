@@ -31,18 +31,6 @@ void printUsage(){
     printf("mysort [--name] [sourcefile.txt] [-o outfile.txt]\n");
 }
 
-
-// int main(){
-//     vector <int> arrayIn {1,4,3,8,5,7,27,6}; 
-//     printf("\nBefore sorting "); 
-//     mergePrint(arrayIn); 
-    
-//     omp_mergesort(arrayIn); 
-    
-//     printf("\nAfter sorting "); 
-//     mergePrint(arrayIn); 
-// }
-
 //main function
 int main(int argc, char* argv[]){ 
 
@@ -115,7 +103,7 @@ int main(int argc, char* argv[]){
    
     cout<<"Running the mergeSort algorithm with input file: "
     <<srcFile<<" and outputting to: "<<outFile<<endl; 
-    
+    //run parellized mergesort
     omp_mergesort(data);  
 
     //Output sorted data to output file

@@ -1,7 +1,7 @@
 # ECEN 4313: Concurrent Programming
 # Author: Elena Murray
-# Date: 8/30/2020
-# Lab 0: 
+# Date: 11/6/2020
+# Lab 3: 
 # 	Makefile
 
 #Executable
